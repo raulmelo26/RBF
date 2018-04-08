@@ -6,35 +6,40 @@ clc; clear;
 % fprintf('|                                IFCE - Maracanaú                        |\n');
 % fprintf('+------------------------------------------------------------------------+\n');
 
-
-dados = load('C:\Users\Raul Melo\Documents\RBF - kfolds\dataIris.dat');
-% dados = load('C:\Users\Raul Melo\Documents\RBF - kfolds\coluna_vertebral.dat');
-% dados = load('C:\Users\Raul Melo\Documents\RBF - kfolds\dermatologia.dat');
-
-% x = load('X.dat');
-% y = load('Y.dat');
-% 
-% dados = [x y];
-
+% VARIAVEIS INICIAIS
 numRealizacoes = 2;
-esc = 1;
+esc = 2;
 abertura = 0.3;
-numAtributos = 4;                   % Iris 4, coluna 6, derm 34, 2
+numAtributos = 1;                   % Iris 4, coluna 6, derm 34, 2
 numNeuroniosOcultos = 10;
-numNeuronioSaida = 3;                % Iris 3, coluna 3, derm 6, 1
+numNeuronioSaida = 1;                % Iris 3, coluna 3, derm 6, 1
 offset = 0.5;
-numPadroes = size(dados,1);
 
 numAberturaInicial = 0.1;
 numAberturaFinal = 1;
 incAbertura = 0.1;
 deltaAbertura = numAberturaInicial:incAbertura:numAberturaFinal;
 
-dados = [normaliza(dados(:,1:numAtributos)) dados(:,numAtributos+1:numAtributos+numNeuronioSaida)];
+% GERA DADOS 2D
+
+x = linspace(0,10,200);
+y = sin(x) + rand(size(x))-offset;
+    
+dados = [x' y' sin(x)'];
+dados = [normaliza(dados)];
+    
+    
+figure(1);
+scatter(dados(:,1), dados(:,3),'.b');
+hold on;
+scatter(dados(:,1), (dados(:,2)), '.r');
+hold on;
+dados = dados(:,1:2);
+
+numPadroes = size(dados,1);
 
 for i = 1:numRealizacoes
     dados = dados(randperm(numPadroes),:);
-    
     [X_treino, Y_treino, X_teste, Y_teste] = separaDados(dados, numAtributos, numNeuronioSaida, 0.8);
     dadosTreino = [X_treino Y_treino];
     
@@ -48,14 +53,22 @@ for i = 1:numRealizacoes
     [abertura, grade] = melhoresParametros(deltaAbertura, dadosTreino, numAtributos, numNeuronioSaida, centros, esc);
     
     [W] = treino(X_treino, Y_treino, abertura, centros);
-
-    acc(i) = teste(W, X_teste, Y_teste, abertura, centros, esc);
+    
+    MSE(i) = teste(W,X_teste,Y_teste,abertura,centros,esc);
+    
+    y_atual = saida_atual(W,dados(:,1), abertura, centros);
+    scatter(dados(:,1), y_atual, '.black')
+    title('Regressão RBF');
+    legend('f(x)','ruido','g(x)')
     clc;
 end
 
 grade
-media_acc = mean(acc)
-desvio_padrao = std(acc)
+MSE_medio = mean(MSE)
+RMSE = sqrt(MSE)
+% dados = [normaliza(dados(:,1:numAtributos)) dados(:,numAtributos+1:numAtributos+numNeuronioSaida)]
+
+
 
 
 

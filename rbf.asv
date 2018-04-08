@@ -1,12 +1,5 @@
 clc; clear;
 
-% fprintf('+------------------------------------------------------------------------+\n');
-% fprintf('|                              PERCEPTRON SIMPLES                        |\n');
-% fprintf('|                     Acadêmico: Raul Gabriel Carvalho de Melo           |\n');
-% fprintf('|                                IFCE - Maracanaú                        |\n');
-% fprintf('+------------------------------------------------------------------------+\n');
-
-
 dados = load('C:\Users\Raul Melo\Documents\RBF - kfolds\dataIris.dat');
 % dados = load('C:\Users\Raul Melo\Documents\RBF - kfolds\coluna_vertebral.dat');
 % dados = load('C:\Users\Raul Melo\Documents\RBF - kfolds\dermatologia.dat');
@@ -47,12 +40,11 @@ for i = 1:numRealizacoes
     
     [abertura, grade] = melhoresParametros(deltaAbertura, dadosTreino, numAtributos, numNeuronioSaida, centros, esc);
     
-    [W] = treino(X_treino, Y_treino, abertura, centros);
+    [W] = treino(X_treino, Y_treino, abertura, centros, esc);
 
-    acc(i) = teste(W, X_teste, Y_teste, abertura, centros, esc);
+    acc(i) = teste(W, X_teste, Y_teste, abertura, centros);
     clc;
 end
-
 grade
 media_acc = mean(acc)
 desvio_padrao = std(acc)

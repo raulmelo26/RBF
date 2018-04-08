@@ -1,7 +1,7 @@
-function [acc] = teste(W, X, D, ro, C)
+function [acc_mse] = teste(W, X, D, ro, C, esc)
 
-    m = size(X,1); %qtd padroes treino
-    n = size(C,1); %qtd centroides
+    m = size(X,1); 
+    n = size(C,1); 
     cont = 0;
     
     for i=1:m
@@ -12,14 +12,21 @@ function [acc] = teste(W, X, D, ro, C)
         
         h = [1 y(i,:)];
         y = h*W;
-        y = binariza(y);
-
-        if isequal(y, D(i,:))
-           cont = cont + 1; 
+        
+        if (esc == 1)
+            y = binariza(y);
+            if isequal(y, D(i,:))
+                cont = cont + 1; 
+            end
+        else
+           SE(i) = (y - D(i))^2; 
         end
     
     end
 
-acc = 100*(cont/m);
+    if (esc == 1)
+        acc_mse = 100*(cont/m);
+    else
+        acc_mse = mean(SE);
 
 end

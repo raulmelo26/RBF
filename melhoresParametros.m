@@ -21,10 +21,9 @@ function [numAbertura, grade] = melhoresParametros(deltaAbertura, dadosTreino,nu
                 [W] = treino(atributosTreino, rotulosTreino, deltaAbertura(i),C);
                 
                 if(esc == 1)
-                    acc(parte) = teste(W, atributosValidacao, rotulosValidacao, deltaAbertura(i), C);
+                    acc(parte) = teste(W, atributosValidacao, rotulosValidacao, deltaAbertura(i), C, esc);
                 else
-                    [H, Y] = sentidoDireto(W1,M,atributosValidacao, 2);
-                    acc(parte) = mean((Y - rotulosValidacao).^2);
+                    acc(parte) = teste(W,atributosValidacao,rotulosValidacao,deltaAbertura(i),C,esc);
                 end
                
             end
@@ -41,10 +40,9 @@ function [numAbertura, grade] = melhoresParametros(deltaAbertura, dadosTreino,nu
                 [W] = treino(atributosTreino, rotulosTreino, deltaAbertura(i),C);
                 
                 if(esc == 1)
-                    acc(parte) = teste(W, atributosValidacao, rotulosValidacao, deltaAbertura(i), C);
+                    acc(parte) = teste(W, atributosValidacao, rotulosValidacao, deltaAbertura(i), C, esc);
                 else
-                    [H, Y] = sentidoDireto(W1,M,atributosValidacao, 2);
-                    acc(parte) = mean((Y - rotulosValidacao).^2);
+                    acc(parte) = teste(W,atributosValidacao,rotulosValidacao,deltaAbertura(i),C,esc);
                 end
                 
             end
@@ -61,10 +59,9 @@ function [numAbertura, grade] = melhoresParametros(deltaAbertura, dadosTreino,nu
                 [W] = treino(atributosTreino, rotulosTreino, deltaAbertura(i),C);
                 
                 if(esc == 1)
-                    acc(parte) = teste(W, atributosValidacao, rotulosValidacao, deltaAbertura(i), C);
+                    acc(parte) = teste(W, atributosValidacao, rotulosValidacao, deltaAbertura(i), C, esc);
                 else
-                    [H, Y] = sentidoDireto(W1,M,atributosValidacao, 2);
-                    acc(parte) = mean((Y - rotulosValidacao).^2);
+                    acc(parte) = teste(W,atributosValidacao,rotulosValidacao,deltaAbertura(i),C,esc);
                 end
                 
             end
@@ -81,10 +78,9 @@ function [numAbertura, grade] = melhoresParametros(deltaAbertura, dadosTreino,nu
                 [W] = treino(atributosTreino, rotulosTreino, deltaAbertura(i),C);
                 
                 if(esc == 1)
-                    acc(parte) = teste(W, atributosValidacao, rotulosValidacao, deltaAbertura(i), C);
+                    acc(parte) = teste(W, atributosValidacao, rotulosValidacao, deltaAbertura(i), C, esc);
                 else
-                    [H, Y] = sentidoDireto(W1,M,atributosValidacao, 2);
-                    acc(parte) = mean((Y - rotulosValidacao).^2);
+                     acc(parte) = teste(W,atributosValidacao,rotulosValidacao,deltaAbertura(i),C,esc);
                 end
                
                 
@@ -102,10 +98,9 @@ function [numAbertura, grade] = melhoresParametros(deltaAbertura, dadosTreino,nu
                [W] = treino(atributosTreino, rotulosTreino, deltaAbertura(i),C);
                 
                 if(esc == 1)
-                    acc(parte) = teste(W, atributosValidacao, rotulosValidacao, deltaAbertura(i), C);
+                    acc(parte) = teste(W, atributosValidacao, rotulosValidacao, deltaAbertura(i), C, esc);
                 else
-                    [H, Y] = sentidoDireto(W1,M,atributosValidacao, 2);
-                    acc(parte) = mean((Y - rotulosValidacao).^2);
+                    acc(parte) = teste(W,atributosValidacao,rotulosValidacao,deltaAbertura(i),C,esc);
                 end
                 
             end

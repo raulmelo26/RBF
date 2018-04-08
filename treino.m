@@ -9,7 +9,6 @@ function [ W ] = treino( X, Y, ro, C )
         for j=1:n
             X_h(i,j) = funcGauss(x, C(j,:), ro);
         end
-
     end
         
     X_h = [ones(m, 1), X_h];
